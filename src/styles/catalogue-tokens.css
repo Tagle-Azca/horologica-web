@@ -1,0 +1,30 @@
+@theme {
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --color-surface-base: #0a0a0a;
+  --color-surface-card: #121212;
+  --color-surface-deep: #111111;
+  --text-micro: 10px;
+  --text-mini: 11px;
+  --shadow-watch: 0 20px 50px rgba(0,0,0,0.8);
+
+  --color-gold-400: #d4a843;
+  --color-gold-500: #c49a2e;
+  --color-gold-glow: rgba(212,168,67,0.15);
+
+  --color-glass-dark: rgba(10,10,10,0.75);
+  --color-glass-border: rgba(255,255,255,0.07);
+
+  --shadow-card: 0 8px 32px rgba(0,0,0,0.6);
+  --shadow-card-hover: 0 20px 60px rgba(0,0,0,0.8), 0 0 40px rgba(212,168,67,0.12);
+
+  --text-nano: 9px;
+  --spacing-card: 1.5rem;
+
+  --color-surface-void: #000000;
+  --color-surface-card-elevated: #191919;
+  --color-gold-glow-strong: rgba(212,168,67,0.25);
+  --color-slider-track: rgba(212,168,67,0.4);
+  --gradient-card-vignette: linear-gradient(to top, rgba(17,17,17,0.88) 0%, rgba(17,17,17,0.2) 45%, transparent 100%);
+  --gradient-card-glow: radial-gradient(ellipse 80% 50% at 50% 100%, rgba(212,168,67,0.06) 0%, transparent 70%);
+}
