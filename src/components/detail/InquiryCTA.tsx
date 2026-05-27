@@ -2,17 +2,21 @@ import { motion } from 'framer-motion';
 import { sectionRevealVariants } from '../../constants/motion-variants';
 
 // ── Actualiza estos valores con tus datos de contacto ──────────────────────
-const WHATSAPP_NUMBER = '521234567890'; // sin + ni espacios
-const EMAIL_ADDRESS   = 'contacto@horologica.mx';
+const WHATSAPP_NUMBER = '525529328929';
+const EMAIL_ADDRESS   = 'gtaglea@hotmail.com';
 // ───────────────────────────────────────────────────────────────────────────
 
 interface InquiryCTAProps {
-  watchName: string;
+  modelName: string;      // nombre del homenaje
+  referenceName: string;  // nombre del original (referencia de análisis)
 }
 
-export function InquiryCTA({ watchName }: InquiryCTAProps) {
+export function InquiryCTA({ modelName, referenceName }: InquiryCTAProps) {
   const message = encodeURIComponent(
-    `Hola, me interesa cotizar la pieza: ${watchName}. ¿Podría darme más información?`
+    `Hola, me interesa solicitar la cotización y consultar la disponibilidad de la siguiente pieza en Tagle Watches:\n\n• Modelo: ${modelName}\n• Referencia de Análisis: ${referenceName}\n• Enlace: ${window.location.href}`
+  );
+  const emailBody = encodeURIComponent(
+    `Hola, me interesa solicitar la cotización y consultar la disponibilidad de la siguiente pieza en Tagle Watches:\n\n• Modelo: ${modelName}\n• Referencia de Análisis: ${referenceName}\n• Enlace: ${window.location.href}`
   );
 
   return (
@@ -48,7 +52,7 @@ export function InquiryCTA({ watchName }: InquiryCTAProps) {
           className="text-[10px] uppercase tracking-[0.18em] text-stone-500 text-center"
           style={{ fontFamily: 'var(--font-mono)' }}
         >
-          {watchName}
+          {modelName}
         </p>
 
         {/* CTA buttons */}
@@ -65,7 +69,7 @@ export function InquiryCTA({ watchName }: InquiryCTAProps) {
             WhatsApp
           </motion.a>
           <motion.a
-            href={`mailto:${EMAIL_ADDRESS}?subject=Cotización: ${watchName}&body=Hola, me interesa cotizar: ${watchName}.`}
+            href={`mailto:${EMAIL_ADDRESS}?subject=Cotización: ${modelName}&body=${emailBody}`}
             className="flex-1 border border-stone-300 py-3.5 text-center text-[10px] uppercase tracking-[0.2em] text-neutral-600 transition-all duration-300"
             style={{ fontFamily: 'var(--font-mono)' }}
             whileHover={{ backgroundColor: '#171717', color: '#ffffff', borderColor: '#171717' }}

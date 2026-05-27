@@ -82,7 +82,7 @@ export function ComparisonPage() {
         homageName={detail.homageName}
       />
 
-      <InquiryCTA watchName={`${detail.originalName} / ${detail.homageName}`} />
+      <InquiryCTA modelName={detail.homageName} referenceName={detail.originalName} />
 
       <HotspotAnalysis
         label={DETAIL.hotspotsLabel}
