@@ -4,12 +4,12 @@ export const watchCardVariants = {
     opacity: 1,
     y: 0,
     boxShadow: 'var(--shadow-card)',
-    transition: { delay: i * 0.08, duration: 0.5, ease: 'easeOut' },
+    transition: { delay: i * 0.08, duration: 0.5, ease: 'easeOut' as const },
   }),
   hover: {
     y: -6,
     boxShadow: 'var(--shadow-card-hover)',
-    transition: { duration: 0.3, ease: 'easeOut' },
+    transition: { duration: 0.3, ease: 'easeOut' as const },
   },
 };
 
@@ -29,7 +29,7 @@ export const pageVariants = {
   exit: {
     opacity: 0,
     y: -8,
-    transition: { duration: 0.25, ease: 'easeIn' },
+    transition: { duration: 0.25, ease: 'easeIn' as const },
   },
 };
 
@@ -47,6 +47,6 @@ export const heroVariants = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.15, duration: 0.7, ease: 'easeOut' },
+    transition: { delay: i * 0.15, duration: 0.7, ease: 'easeOut' as const },
   }),
 };

@@ -61,7 +61,7 @@ export function HotspotAnalysis({ label, hint, watch, similarities }: HotspotAna
                   style={{ border: '1.5px solid var(--color-gold-400)' }}
                   initial={{ scale: 1, opacity: 0.75 }}
                   animate={{ scale: 2.2, opacity: 0 }}
-                  transition={{ duration: 0.5, ease: 'easeOut' }}
+                  transition={{ duration: 0.5, ease: 'easeOut' as const }}
                 />
               )}
               <span
