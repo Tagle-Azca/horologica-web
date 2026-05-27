@@ -15,14 +15,29 @@ const CATEGORY_LABELS: Record<string, string> = {
   dress: 'Vestir', gmt: 'GMT', sport: 'Sport', pilot: 'Piloto', field: 'Field',
 };
 
+const FILTERS = [
+  { key: 'all', label: 'Todos' },
+  { key: 'dive', label: 'Buceo' },
+  { key: 'integrated', label: 'Brazalete' },
+  { key: 'chronograph', label: 'Cronógrafo' },
+  { key: 'dress', label: 'Vestir' },
+  { key: 'gmt', label: 'GMT' },
+  { key: 'sport', label: 'Sport' },
+  { key: 'pilot', label: 'Piloto' },
+  { key: 'field', label: 'Field' },
+];
+
 export function WatchList() {
   const navigate = useNavigate();
   const [watches, setWatches] = useState<WatchRow[]>([]);
+  const [activeFilter, setActiveFilter] = useState('all');
 
   useEffect(() => {
     supabase?.from('watches').select('id, style_name, category, icon_image_url, stock').order('sort_order')
       .then(({ data }) => setWatches(data ?? []));
   }, []);
+
+  const filtered = activeFilter === 'all' ? watches : watches.filter(w => w.category === activeFilter);
 
   async function handleStock(id: string, value: number) {
     const stock = Math.max(0, value);
@@ -51,10 +66,26 @@ export function WatchList() {
         </button>
       </div>
 
-      {watches.length === 0 ? (
+      <div className="flex flex-wrap gap-2 mb-6">
+        {FILTERS.map(f => (
+          <button
+            key={f.key}
+            onClick={() => setActiveFilter(f.key)}
+            className={`text-xs font-medium px-3 py-1.5 rounded-lg transition-colors ${
+              activeFilter === f.key
+                ? 'bg-white text-black'
+                : 'bg-neutral-800 text-neutral-400 hover:text-neutral-200'
+            }`}
+          >
+            {f.label}
+          </button>
+        ))}
+      </div>
+
+      {filtered.length === 0 ? (
         <div className="text-center py-20 bg-neutral-900 border border-neutral-800 rounded-2xl">
-          <p className="text-neutral-400 text-base mb-2">Aún no hay relojes</p>
-          <p className="text-neutral-600 text-sm mb-6">Comienza agregando tu primer par de relojes.</p>
+          <p className="text-neutral-400 text-base mb-2">{activeFilter === 'all' ? 'Aún no hay relojes' : 'Sin relojes en esta categoría'}</p>
+          <p className="text-neutral-600 text-sm mb-6">{activeFilter === 'all' ? 'Comienza agregando tu primer par de relojes.' : ''}</p>
           <button onClick={() => navigate('/admin/watches/new')}
             className="bg-white hover:bg-neutral-200 text-black text-sm font-semibold px-5 py-3 rounded-xl transition-colors">
             + Agregar reloj
@@ -62,7 +93,7 @@ export function WatchList() {
         </div>
       ) : (
         <div className="flex flex-col gap-3">
-          {watches.map((w) => (
+          {filtered.map((w) => (
             <div key={w.id} className="flex items-center gap-5 bg-neutral-900 border border-neutral-800 rounded-2xl p-4 hover:border-neutral-700 transition-colors">
               {w.icon_image_url ? (
                 <img src={w.icon_image_url} alt={w.style_name} className="w-16 h-16 object-cover rounded-xl flex-shrink-0" />
