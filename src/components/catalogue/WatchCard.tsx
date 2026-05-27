@@ -14,6 +14,7 @@ interface WatchCardProps {
 
 export function WatchCard({ entry, index, onViewClick }: WatchCardProps) {
   const { icon, homage } = watchImages(entry);
+  const outOfStock = entry.stock === 0;
   return (
     <motion.article
       variants={watchCardVariants}
@@ -22,9 +23,17 @@ export function WatchCard({ entry, index, onViewClick }: WatchCardProps) {
       animate="visible"
       whileHover="hover"
       onClick={() => onViewClick(entry.id)}
-      className="bg-surface-deep border border-stone-200/80 rounded-xl overflow-hidden flex flex-col cursor-pointer group"
+      className={`bg-surface-deep border border-stone-200/80 rounded-xl overflow-hidden flex flex-col cursor-pointer group relative ${outOfStock ? 'opacity-70' : ''}`}
     >
-      <CardImageLayout iconWatch={icon} homageWatch={homage} />
+      {outOfStock && (
+        <span className="absolute top-3 right-3 z-10 font-mono text-[10px] tracking-widest uppercase text-stone-400 bg-white/80 px-2 py-0.5 rounded-full">
+          Bajo Pedido
+        </span>
+      )}
+
+      <div className={outOfStock ? 'grayscale' : ''}>
+        <CardImageLayout iconWatch={icon} homageWatch={homage} />
+      </div>
 
       <BadgeRow badges={entry.badges} />
 

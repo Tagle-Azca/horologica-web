@@ -12,6 +12,7 @@ function toEntry(row: Record<string, unknown>): HomageEntry {
     badges:        (row.badges as string[]) ?? [],
     iconImageUrl:  row.icon_image_url as string | undefined,
     homageImageUrl:row.homage_image_url as string | undefined,
+    stock:         (row.stock as number) ?? 0,
   };
 }
 

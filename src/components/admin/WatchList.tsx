@@ -7,6 +7,7 @@ interface WatchRow {
   style_name: string;
   category: string;
   icon_image_url?: string;
+  stock: number;
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -19,9 +20,15 @@ export function WatchList() {
   const [watches, setWatches] = useState<WatchRow[]>([]);
 
   useEffect(() => {
-    supabase?.from('watches').select('id, style_name, category, icon_image_url').order('sort_order')
+    supabase?.from('watches').select('id, style_name, category, icon_image_url, stock').order('sort_order')
       .then(({ data }) => setWatches(data ?? []));
   }, []);
+
+  async function handleStock(id: string, value: number) {
+    const stock = Math.max(0, value);
+    setWatches(prev => prev.map(w => w.id === id ? { ...w, stock } : w));
+    await supabase?.from('watches').update({ stock }).eq('id', id);
+  }
 
   async function handleDelete(id: string, name: string) {
     if (!confirm(`¿Seguro que quieres eliminar "${name}"? Esta acción no se puede deshacer.`)) return;
@@ -66,11 +73,26 @@ export function WatchList() {
               )}
 
               <div className="flex-1 min-w-0">
-                <p className="text-base font-medium text-neutral-100 truncate">{w.style_name}</p>
+                <div className="flex items-center gap-2">
+                  <p className="text-base font-medium text-neutral-100 truncate">{w.style_name}</p>
+                  {w.stock === 0 && (
+                    <span className="text-xs text-neutral-600 font-medium shrink-0">Sin stock</span>
+                  )}
+                </div>
                 <p className="text-sm text-neutral-500 mt-0.5">{CATEGORY_LABELS[w.category] ?? w.category}</p>
               </div>
 
               <div className="flex items-center gap-2 flex-shrink-0">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs text-neutral-600 hidden sm:block">Stock</span>
+                  <input
+                    type="number"
+                    min={0}
+                    value={w.stock}
+                    onChange={e => handleStock(w.id, parseInt(e.target.value) || 0)}
+                    className="w-14 bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm text-neutral-100 text-center focus:outline-none focus:border-neutral-500"
+                  />
+                </div>
                 <button
                   onClick={() => navigate(`/admin/watches/${w.id}/edit`)}
                   className="text-sm font-medium text-neutral-300 hover:text-white bg-neutral-800 hover:bg-neutral-700 px-4 py-2 rounded-lg transition-colors"

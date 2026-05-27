@@ -14,6 +14,7 @@ export interface HomageEntry {
   badges: readonly string[];
   iconImageUrl?: string;
   homageImageUrl?: string;
+  stock: number;
 }
 
 export const homages: HomageEntry[] = [];
