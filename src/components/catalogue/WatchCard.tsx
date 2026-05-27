@@ -22,14 +22,14 @@ export function WatchCard({ entry, index, onViewClick }: WatchCardProps) {
       animate="visible"
       whileHover="hover"
       onClick={() => onViewClick(entry.id)}
-      className="bg-surface-deep border border-neutral-800/60 rounded-xl overflow-hidden flex flex-col cursor-pointer"
+      className="bg-surface-deep border border-stone-200/80 rounded-xl overflow-hidden flex flex-col cursor-pointer group"
     >
       <CardImageLayout iconWatch={icon} homageWatch={homage} />
 
       <BadgeRow badges={entry.badges} />
 
       <div className="px-4 pt-3 pb-2">
-        <h3 className="font-serif tracking-wider text-lg text-neutral-100 leading-tight">
+        <h3 className="font-serif tracking-wider text-lg text-neutral-800 leading-tight">
           {entry.styleName}
         </h3>
         <p className="text-mini font-sans text-neutral-500 tracking-wide uppercase mt-0.5">
@@ -45,12 +45,12 @@ export function WatchCard({ entry, index, onViewClick }: WatchCardProps) {
         />
       </div>
 
-      <p className="px-4 pb-3 text-xs font-sans text-neutral-400 leading-relaxed line-clamp-2">
+      <p className="px-4 pb-3 text-xs font-sans text-neutral-600 leading-relaxed line-clamp-2">
         {entry.editorial}
       </p>
 
       <div
-        className="mt-auto w-full py-2.5 bg-neutral-900 border-t border-neutral-800 text-neutral-300 text-nano font-semibold tracking-widest uppercase flex items-center justify-center gap-1.5"
+        className="mt-auto w-full py-3 border-t border-stone-200/60 text-neutral-500 group-hover:text-gold-400 text-nano font-medium tracking-[0.22em] uppercase flex items-center justify-center gap-2 transition-colors duration-300"
       >
         <span>{CATALOGUE.cardCtaLabel}</span>
         <span>{CATALOGUE.cardCtaArrow}</span>

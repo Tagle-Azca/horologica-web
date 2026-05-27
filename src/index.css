@@ -1,2 +1,10 @@
 @import "tailwindcss";
 @import "./styles/catalogue-tokens.css";
+
+body {
+  background:
+    radial-gradient(ellipse 130% 50% at 5% 0%, rgba(220,225,235,0.5) 0%, transparent 55%),
+    radial-gradient(ellipse 90% 55% at 95% 95%, rgba(210,218,228,0.45) 0%, transparent 60%),
+    linear-gradient(160deg, #f8f9fb 0%, #f2f4f7 40%, #eceef2 100%);
+  background-attachment: fixed;
+}

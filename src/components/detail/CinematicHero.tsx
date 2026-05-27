@@ -26,7 +26,7 @@ const panelVariants = {
 export function CinematicHero({ entry, detail }: CinematicHeroProps) {
   const { icon, homage } = watchImages(entry);
   return (
-    <section className="min-h-screen flex flex-col items-center justify-between py-16 px-6 overflow-hidden bg-black">
+    <section className="min-h-screen flex flex-col items-center justify-between py-10 md:py-16 px-4 md:px-6 overflow-hidden">
       <motion.div
         className="text-center max-w-2xl mt-4"
         initial={{ opacity: 0, y: 20 }}
@@ -36,21 +36,21 @@ export function CinematicHero({ entry, detail }: CinematicHeroProps) {
         <p className="text-nano font-sans tracking-widest uppercase text-neutral-700 mb-5 font-medium">
           {DETAIL.originalTag}&nbsp;&nbsp;·&nbsp;&nbsp;{DETAIL.homageTag}
         </p>
-        <h1 className="font-serif text-4xl md:text-6xl text-neutral-50 leading-tight whitespace-pre-line">
+        <h1 className="font-serif text-4xl md:text-6xl text-neutral-800 leading-tight whitespace-pre-line">
           {detail.heroTagline}
         </h1>
       </motion.div>
 
-      <div className="flex items-center w-full max-w-3xl mt-8">
+      <div className="flex flex-col md:flex-row items-center w-full max-w-3xl mt-6 md:mt-8 gap-4 md:gap-0">
         {/* La Referencia — smaller, subdued, referential */}
         <motion.div
-          className="flex-1 flex flex-col items-center gap-4"
+          className="flex flex-col items-center gap-4 md:flex-1"
           custom={-1}
           variants={panelVariants}
           initial="hidden"
           animate="visible"
         >
-          <div className="relative w-full max-w-52 aspect-square">
+          <div className="relative w-full max-w-[160px] md:max-w-52 aspect-square">
             <div className="absolute inset-0 rounded-full" style={dimGlow} />
             <div className="relative z-10 w-full h-full" style={{ filter: 'brightness(0.68) saturate(0.72)' }}>
               <WatchImageAtom src={icon.src} alt={icon.alt}
@@ -65,25 +65,25 @@ export function CinematicHero({ entry, detail }: CinematicHeroProps) {
 
         {/* VS divider */}
         <motion.div
-          className="flex flex-col items-center gap-3 px-5 shrink-0"
+          className="flex flex-row md:flex-col items-center gap-3 md:px-5 shrink-0"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.7 }}
         >
-          <div className="w-px h-20 opacity-20" style={{ backgroundColor: 'var(--color-gold-400)' }} />
+          <div className="h-px w-10 md:h-20 md:w-px opacity-20" style={{ backgroundColor: 'var(--color-gold-400)' }} />
           <p className="font-serif text-xs opacity-30" style={{ color: 'var(--color-gold-400)' }}>VS</p>
-          <div className="w-px h-20 opacity-20" style={{ backgroundColor: 'var(--color-gold-400)' }} />
+          <div className="h-px w-10 md:h-20 md:w-px opacity-20" style={{ backgroundColor: 'var(--color-gold-400)' }} />
         </motion.div>
 
         {/* La Interpretación — larger, brighter, visually dominant */}
         <motion.div
-          className="flex-1 flex flex-col items-center gap-5"
+          className="flex flex-col items-center gap-5 md:flex-1"
           custom={1}
           variants={panelVariants}
           initial="hidden"
           animate="visible"
           transition={{ delay: 0.15 }}
         >
-          <div className="relative w-full max-w-sm aspect-square">
+          <div className="relative w-full max-w-[200px] md:max-w-sm aspect-square">
             <div className="absolute inset-0 rounded-full" style={brightGlow} />
             <div className="relative z-10 w-full h-full" style={{ filter: 'brightness(1.07) contrast(1.05) saturate(1.04)' }}>
               <WatchImageAtom src={homage.src} alt={homage.alt}
@@ -95,7 +95,7 @@ export function CinematicHero({ entry, detail }: CinematicHeroProps) {
                style={{ color: 'var(--color-gold-400)' }}>
               {DETAIL.homageTag}
             </p>
-            <p className="font-serif text-neutral-200 text-base leading-snug">{detail.homageName}</p>
+            <p className="font-serif text-neutral-700 text-base leading-snug">{detail.homageName}</p>
           </div>
         </motion.div>
       </div>

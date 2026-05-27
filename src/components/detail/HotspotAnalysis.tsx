@@ -21,7 +21,12 @@ const POSITIONS = [
 
 export function HotspotAnalysis({ label, hint, watch, similarities }: HotspotAnalysisProps) {
   const [active, setActive] = useState<number | null>(null);
-  const toggle = (i: number) => setActive(active === i ? null : i);
+  const [pulseKeys, setPulseKeys] = useState<number[]>(() => similarities.map(() => 0));
+
+  const toggle = (i: number) => {
+    setActive(prev => prev === i ? null : i);
+    setPulseKeys(keys => keys.map((k, idx) => idx === i ? k + 1 : k));
+  };
 
   return (
     <motion.section
@@ -29,14 +34,14 @@ export function HotspotAnalysis({ label, hint, watch, similarities }: HotspotAna
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: '-60px' }}
-      className="py-20 px-6 max-w-5xl mx-auto"
+      className="py-12 md:py-20 px-4 md:px-6 max-w-5xl mx-auto"
     >
       <p className="text-nano font-sans tracking-widest uppercase mb-2" style={{ color: 'var(--color-gold-400)' }}>{label}</p>
       <div className="w-8 h-px mb-3" style={{ backgroundColor: 'var(--color-gold-400)' }} />
       <p className="text-xs text-neutral-600 font-sans tracking-wide mb-10">{hint}</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-        <div className="relative aspect-square bg-neutral-950 rounded-2xl overflow-hidden border border-neutral-800/40 p-8">
+        <div className="relative aspect-square rounded-2xl overflow-hidden p-8" style={{ backgroundColor: '#faf9f8', border: '4px solid rgba(214,211,206,0.8)' }}>
           <WatchImageAtom src={watch.src} alt={watch.alt} className="w-full h-full object-contain" />
 
           {POSITIONS.map((pos, i) => (
@@ -49,12 +54,16 @@ export function HotspotAnalysis({ label, hint, watch, similarities }: HotspotAna
               whileHover={{ scale: 1.2 }}
               transition={{ type: 'spring', stiffness: 380, damping: 22 }}
             >
-              <motion.span
-                className="absolute inset-0 rounded-full pointer-events-none"
-                style={{ border: '1.5px solid var(--color-gold-400)' }}
-                animate={{ scale: [1, 2], opacity: [0.6, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'easeOut', delay: i * 0.5 }}
-              />
+              {pulseKeys[i] > 0 && (
+                <motion.span
+                  key={pulseKeys[i]}
+                  className="absolute inset-0 rounded-full pointer-events-none"
+                  style={{ border: '1.5px solid var(--color-gold-400)' }}
+                  initial={{ scale: 1, opacity: 0.75 }}
+                  animate={{ scale: 2.2, opacity: 0 }}
+                  transition={{ duration: 0.5, ease: 'easeOut' }}
+                />
+              )}
               <span
                 className="relative flex w-7 h-7 items-center justify-center rounded-full text-nano font-bold z-10"
                 style={{
@@ -75,8 +84,8 @@ export function HotspotAnalysis({ label, hint, watch, similarities }: HotspotAna
               key={feature}
               className="text-left rounded-xl px-5 py-4 border transition-colors duration-200"
               style={{
-                borderColor: active === i ? 'var(--color-gold-400)' : 'rgba(255,255,255,0.06)',
-                backgroundColor: active === i ? 'rgba(212,168,67,0.05)' : 'var(--color-surface-deep)',
+                borderColor: active === i ? 'var(--color-gold-400)' : 'rgba(0,0,0,0.08)',
+                backgroundColor: active === i ? 'rgba(212,168,67,0.06)' : 'rgba(0,0,0,0.02)',
               }}
               onClick={() => toggle(i)}
               whileHover={{ borderColor: 'var(--color-gold-500)' }}
@@ -92,7 +101,7 @@ export function HotspotAnalysis({ label, hint, watch, similarities }: HotspotAna
                 >
                   {i + 1}
                 </span>
-                <h4 className="font-serif text-sm text-neutral-200 leading-snug">{feature}</h4>
+                <h4 className="font-serif text-sm text-neutral-800 leading-snug">{feature}</h4>
               </div>
               <AnimatePresence>
                 {active === i && (
@@ -101,7 +110,7 @@ export function HotspotAnalysis({ label, hint, watch, similarities }: HotspotAna
                     animate={{ opacity: 1, height: 'auto', marginTop: 8 }}
                     exit={{ opacity: 0, height: 0, marginTop: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="text-xs text-neutral-400 font-sans leading-relaxed pl-8 overflow-hidden"
+                    className="text-xs text-neutral-600 font-sans leading-relaxed pl-8 overflow-hidden"
                   >
                     {description}
                   </motion.p>

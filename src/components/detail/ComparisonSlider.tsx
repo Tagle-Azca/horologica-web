@@ -2,6 +2,8 @@ import { useRef, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import type { WatchImage } from '../../data/homages';
 import { DETAIL } from '../../constants/ui-strings';
+
+const MONO = { fontFamily: 'var(--font-mono)' };
 import { WatchImageAtom } from '../catalogue/WatchImageAtom';
 import { sectionRevealVariants } from '../../constants/motion-variants';
 
@@ -41,7 +43,7 @@ export function ComparisonSlider({ original, homage, originalName, homageName }:
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: '-60px' }}
-      className="py-20 px-6 max-w-4xl mx-auto"
+      className="py-12 md:py-20 px-4 md:px-6 max-w-4xl mx-auto"
     >
       <p className="text-nano font-sans tracking-widest uppercase mb-2" style={{ color: 'var(--color-gold-400)' }}>
         {DETAIL.sliderLabel}
@@ -50,12 +52,16 @@ export function ComparisonSlider({ original, homage, originalName, homageName }:
 
       <div
         ref={containerRef}
-        className="relative w-full h-80 md:h-[480px] overflow-hidden rounded-2xl bg-neutral-950 border border-neutral-800/40 select-none"
-        style={{ cursor: dragging ? 'ew-resize' : 'col-resize' }}
+        className="relative w-full h-80 md:h-[480px] overflow-hidden rounded-2xl select-none"
+        style={{
+          backgroundColor: '#faf9f8',
+          border: '4px solid rgba(214,211,206,0.8)',
+          cursor: dragging ? 'ew-resize' : 'col-resize',
+          touchAction: 'none',
+        }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
-        onPointerLeave={onPointerUp}
       >
         <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 0 0 ${position}%)` }}>
           <div className="absolute inset-0 p-10">
@@ -77,7 +83,7 @@ export function ComparisonSlider({ original, homage, originalName, homageName }:
           style={{
             left: `${position}%`,
             borderColor: 'var(--color-gold-400)',
-            backgroundColor: 'rgba(0,0,0,0.92)',
+            backgroundColor: 'rgba(250,249,248,0.97)',
             boxShadow: `0 0 20px var(--color-gold-glow)`,
           }}
           animate={{ scale: dragging ? 0.88 : 1 }}
@@ -86,17 +92,26 @@ export function ComparisonSlider({ original, homage, originalName, homageName }:
           <span className="font-sans font-bold select-none" style={{ color: 'var(--color-gold-400)', fontSize: 13 }}>⟺</span>
         </motion.div>
 
-        <div className="absolute bottom-4 left-4 pointer-events-none">
-          <p className="text-nano font-sans tracking-widest uppercase px-2 py-1 rounded"
-            style={{ color: 'rgb(163,163,163)', backgroundColor: 'rgba(0,0,0,0.7)' }}>
+      </div>
+
+      {/* metadata bar */}
+      <div className="flex justify-center items-center gap-6 mt-3 px-1">
+        <div className="flex flex-col gap-0.5 items-end">
+          <span className="text-[9px] uppercase tracking-[0.2em] text-stone-400" style={MONO}>
+            ← {DETAIL.originalTag}
+          </span>
+          <span className="text-[9px] text-stone-400/60 truncate max-w-[120px] md:max-w-[180px] text-right" style={MONO}>
             {originalName}
-          </p>
+          </span>
         </div>
-        <div className="absolute bottom-4 right-4 pointer-events-none">
-          <p className="text-nano font-sans tracking-widest uppercase px-2 py-1 rounded"
-            style={{ color: 'var(--color-gold-400)', backgroundColor: 'rgba(0,0,0,0.7)' }}>
+        <div className="w-px h-6 bg-stone-300/60 flex-shrink-0" />
+        <div className="flex flex-col gap-0.5 items-start">
+          <span className="text-[9px] uppercase tracking-[0.2em] text-stone-400" style={MONO}>
+            {DETAIL.homageTag} →
+          </span>
+          <span className="text-[9px] text-stone-400/60 truncate max-w-[120px] md:max-w-[180px]" style={MONO}>
             {homageName}
-          </p>
+          </span>
         </div>
       </div>
     </motion.section>

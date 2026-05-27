@@ -18,7 +18,7 @@ export function IconicClosure({ text, onBack, backLabel }: IconicClosureProps) {
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 1 }}
-      className="bg-black py-28 px-8 flex flex-col items-center text-center"
+      className="py-16 md:py-28 px-5 md:px-8 flex flex-col items-center text-center"
     >
       <p className="text-nano font-sans tracking-widest uppercase mb-10" style={{ color: 'var(--color-gold-400)' }}>
         {DETAIL.iconicLabel}
@@ -29,7 +29,7 @@ export function IconicClosure({ text, onBack, backLabel }: IconicClosureProps) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-        className="font-serif text-2xl md:text-4xl text-neutral-100 italic leading-snug max-w-3xl mb-8"
+        className="font-serif text-2xl md:text-4xl text-neutral-800 italic leading-snug max-w-3xl mb-8"
       >
         {quote}
       </motion.p>

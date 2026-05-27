@@ -10,15 +10,15 @@ interface CardImageLayoutProps {
 const overlayStyle = {
   backdropFilter: 'blur(10px)',
   WebkitBackdropFilter: 'blur(10px)',
-  backgroundColor: 'rgba(8,8,8,0.82)',
-  border: '1px solid rgba(255,255,255,0.06)',
+  backgroundColor: 'rgba(250,248,245,0.90)',
+  border: '1px solid rgba(0,0,0,0.07)',
 };
 
 export function CardImageLayout({ iconWatch, homageWatch }: CardImageLayoutProps) {
   return (
     <div className="relative h-64 overflow-hidden rounded-t-xl">
       {/* Homage: primary subject — slightly brightened for cinematic presence */}
-      <div className="w-full h-full" style={{ filter: 'brightness(1.05) contrast(1.06) saturate(1.03)' }}>
+      <div className="w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.04]" style={{ filter: 'brightness(1.05) contrast(1.06) saturate(1.03)' }}>
         <WatchImageAtom
           src={homageWatch.src}
           alt={homageWatch.alt}

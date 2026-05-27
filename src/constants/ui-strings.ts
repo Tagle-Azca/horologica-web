@@ -1,7 +1,7 @@
 export const HERO = {
-  eyebrow: 'Diseño · Percepción · Valor',
-  headline: 'Cinco Iconos.\nCinco Reinterpretaciones.',
-  subheadline: 'Una exploración visual del valor percibido en el diseño de lujo.',
+  headline: 'La apreciación del diseño\nno conoce de etiquetas.',
+  subtitle: 'El arte de la reinterpretación.',
+  gridLabel: 'Mismas líneas, diferentes propósitos',
 } as const;
 
 export const FILTER = {
@@ -24,7 +24,6 @@ export const DETAIL = {
   homageTag: 'La Interpretación',
   inspirationLabel: 'El Origen Visual',
   philosophyLabel: 'Lenguaje Visual',
-  heritageLabel: 'Capital Cultural',
   iconicLabel: 'La Iconicidad',
   hotspotsLabel: 'Elementos Formales Compartidos',
   hotspotsHint: 'Toca los puntos para explorar las coincidencias formales entre ambos diseños.',

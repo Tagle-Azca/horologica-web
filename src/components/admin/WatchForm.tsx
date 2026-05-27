@@ -21,7 +21,7 @@ interface FormState {
   id: string; style_name: string; brand_original: string; brand_homage: string; editorial: string;
   category: string; badges: string; icon_image_url: string; homage_image_url: string;
   original_name: string; homage_name: string; hero_tagline: string;
-  inspiration_story: string; design_philosophy: string; heritage_context: string;
+  design_philosophy: string;
   why_iconic: string; visual_similarities: VisualSimilarity[]; tech_specs: TechSpec[];
 }
 
@@ -29,7 +29,7 @@ const empty: FormState = {
   id: '', style_name: '', brand_original: '', brand_homage: '', editorial: '', category: 'dive',
   badges: '', icon_image_url: '', homage_image_url: '',
   original_name: '', homage_name: '', hero_tagline: '',
-  inspiration_story: '', design_philosophy: '', heritage_context: '',
+  design_philosophy: '',
   why_iconic: '', visual_similarities: [], tech_specs: [],
 };
 
@@ -83,8 +83,8 @@ export function WatchForm() {
         icon_image_url: w.icon_image_url ?? '',
         homage_image_url: w.homage_image_url ?? '',
         original_name: d?.original_name ?? '', homage_name: d?.homage_name ?? '',
-        hero_tagline: d?.hero_tagline ?? '', inspiration_story: d?.inspiration_story ?? '',
-        design_philosophy: d?.design_philosophy ?? '', heritage_context: d?.heritage_context ?? '',
+        hero_tagline: d?.hero_tagline ?? '',
+        design_philosophy: d?.design_philosophy ?? '',
         why_iconic: d?.why_iconic ?? '',
         visual_similarities: (d?.visual_similarities as VisualSimilarity[]) ?? [],
         tech_specs: (d?.tech_specs as TechSpec[]) ?? [],
@@ -119,8 +119,8 @@ export function WatchForm() {
     };
     const detailPayload = {
       id: form.id, original_name: form.original_name, homage_name: form.homage_name,
-      hero_tagline: form.hero_tagline, inspiration_story: form.inspiration_story,
-      design_philosophy: form.design_philosophy, heritage_context: form.heritage_context,
+      hero_tagline: form.hero_tagline,
+      design_philosophy: form.design_philosophy,
       why_iconic: form.why_iconic, visual_similarities: form.visual_similarities,
       tech_specs: form.tech_specs,
     };
@@ -164,7 +164,7 @@ export function WatchForm() {
         </select>
       </Field>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Field label="Reloj original" hint="La marca y modelo de lujo. Ej: Rolex Submariner">
           <input className={input} value={form.brand_original} onChange={set('brand_original')}
             placeholder="Ej: Rolex Submariner" required />
@@ -193,7 +193,7 @@ export function WatchForm() {
       <Section number={2} title="Fotos"
         description="Sube la foto del reloj original (de lujo) y la foto del homenaje." />
 
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <ImageUploader
           label="Reloj original (de lujo)"
           description="El Rolex, AP, Patek, etc."
@@ -211,7 +211,7 @@ export function WatchForm() {
       <Section number={3} title="Página de detalle"
         description="Lo que aparece cuando el visitante hace clic en la tarjeta. Puedes dejarlo vacío y llenarlo después." />
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Field label="Nombre completo del original" hint="Ej: Rolex Yacht-Master 126622">
           <input className={input} value={form.original_name} onChange={set('original_name')}
             placeholder="Ej: Rolex Yacht-Master 126622" />
@@ -227,19 +227,9 @@ export function WatchForm() {
           placeholder="Ej: Dos relojes.\nUna distancia visual sorprendentemente corta." />
       </Field>
 
-      <Field label="Historia de inspiración" hint="¿De dónde viene el diseño original? ¿Qué lo hace especial?">
-        <textarea className={area} rows={4} value={form.inspiration_story} onChange={set('inspiration_story')}
-          placeholder="Cuenta la historia del diseño original..." />
-      </Field>
-
       <Field label="Filosofía de diseño" hint="¿Qué elementos visuales comparten ambos relojes?">
         <textarea className={area} rows={4} value={form.design_philosophy} onChange={set('design_philosophy')}
           placeholder="Describe los elementos de diseño que los acercan..." />
-      </Field>
-
-      <Field label="Contexto histórico" hint="¿Cuándo nació este estilo? ¿Qué significó para la relojería?">
-        <textarea className={area} rows={4} value={form.heritage_context} onChange={set('heritage_context')}
-          placeholder="El contexto histórico y cultural..." />
       </Field>
 
       <Field label="¿Por qué es icónico?" hint="¿Qué hace a este diseño tan reconocible e influyente?">
@@ -293,7 +283,7 @@ export function WatchForm() {
             <div className="flex flex-col gap-3">
               <input className={input} placeholder="Nombre (Ej: Movimiento, Material, Diámetro...)"
                 value={s.label} onChange={(e) => updateSpec(i, 'label', e.target.value)} />
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <input className={input} placeholder="Valor del original (Ej: Cal. 3235)"
                   value={s.original} onChange={(e) => updateSpec(i, 'original', e.target.value)} />
                 <input className={input} placeholder="Valor del homenaje (Ej: Miyota 8215)"

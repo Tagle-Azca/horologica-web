@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
-import { homages } from '../data/homages';
 import type { HomageEntry, WatchCategory } from '../data/homages';
 
 function toEntry(row: Record<string, unknown>): HomageEntry {
@@ -17,7 +16,7 @@ function toEntry(row: Record<string, unknown>): HomageEntry {
 }
 
 export function useWatches() {
-  const [entries, setEntries] = useState<HomageEntry[]>(homages);
+  const [entries, setEntries] = useState<HomageEntry[]>([]);
   const [loading, setLoading] = useState(!!supabase);
 
   useEffect(() => {

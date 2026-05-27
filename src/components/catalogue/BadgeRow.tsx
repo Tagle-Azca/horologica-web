@@ -8,7 +8,7 @@ export function BadgeRow({ badges }: BadgeRowProps) {
       {badges.map((badge) => (
         <span
           key={badge}
-          className="text-nano font-sans tracking-widest uppercase bg-neutral-900 border border-neutral-800 text-neutral-400 rounded-full px-2 py-0.5"
+          className="text-nano font-sans tracking-widest uppercase border border-white/[0.09] text-neutral-600 rounded-full px-2 py-0.5"
         >
           {badge}
         </span>

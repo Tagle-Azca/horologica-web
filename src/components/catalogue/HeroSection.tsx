@@ -9,48 +9,40 @@ const noiseStyle = {
 export function HeroSection() {
   return (
     <header
-      className="relative flex flex-col items-center justify-center text-center px-6 pt-24 pb-16 bg-surface-base overflow-hidden"
+      className="relative flex flex-col items-center justify-center text-center px-6 pt-40 pb-20 overflow-hidden"
       style={noiseStyle}
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-transparent to-surface-base pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-amber-100/20 via-transparent to-transparent pointer-events-none" />
 
-      <div className="relative z-10 flex flex-col items-center gap-4">
-        <motion.p
-          className="text-nano font-sans tracking-widest uppercase text-gold-400 opacity-80"
+      <div className="relative z-10 flex flex-col items-center gap-6">
+
+        <motion.h1
+          className="font-serif text-5xl md:text-7xl text-neutral-800 leading-tight tracking-tight whitespace-pre-line"
           variants={heroVariants}
           initial="hidden"
           animate="visible"
           custom={0}
         >
-          {HERO.eyebrow}
-        </motion.p>
+          {HERO.headline}
+        </motion.h1>
 
-        <motion.h1
-          className="font-serif text-5xl md:text-7xl text-neutral-100 leading-none tracking-tight whitespace-pre-line"
+        <motion.div
+          className="w-14 h-px bg-gold-400"
+          initial={{ scaleX: 0, opacity: 0 }}
+          animate={{ scaleX: 1, opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.6, ease: 'easeOut' }}
+        />
+
+        <motion.p
+          className="font-sans text-sm text-stone-500 tracking-wide"
           variants={heroVariants}
           initial="hidden"
           animate="visible"
           custom={1}
         >
-          {HERO.headline}
-        </motion.h1>
-
-        <motion.div
-          className="w-16 h-px bg-gold-400 origin-center"
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.6, ease: 'easeOut' }}
-        />
-
-        <motion.p
-          className="font-sans text-sm text-neutral-400 tracking-wide max-w-sm"
-          variants={heroVariants}
-          initial="hidden"
-          animate="visible"
-          custom={2}
-        >
-          {HERO.subheadline}
+          {HERO.subtitle}
         </motion.p>
+
       </div>
     </header>
   );

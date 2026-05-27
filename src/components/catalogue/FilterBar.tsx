@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FILTER } from '../../constants/ui-strings';
 import type { WatchCategory } from '../../data/homages';
 
@@ -19,35 +19,28 @@ const options: FilterOption[] = [
 
 export function FilterBar({ active, onSelect }: FilterBarProps) {
   return (
-    <nav className="flex items-center justify-center gap-2 flex-wrap px-6 py-6">
-      {options.map(({ key, label }) => (
-        <motion.button
-          key={key}
-          onClick={() => onSelect(key)}
-          whileTap={{ scale: 0.95 }}
-          className="relative px-4 py-1.5 text-nano font-sans tracking-widest uppercase rounded-full border transition-colors duration-200"
-          style={{
-            borderColor:
-              active === key ? 'var(--color-gold-400)' : 'rgba(255,255,255,0.1)',
-            color: active === key ? 'var(--color-gold-400)' : 'rgb(163,163,163)',
-          }}
-        >
-          <AnimatePresence>
+    <nav className="overflow-x-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
+      <div className="flex items-center gap-6 px-6 pt-8 pb-8 w-max min-w-full justify-center">
+        {options.map(({ key, label }) => (
+          <motion.button
+            key={key}
+            onClick={() => onSelect(key)}
+            whileTap={{ scale: 0.97 }}
+            className="relative pb-2 text-[10px] font-sans tracking-[0.18em] uppercase transition-colors duration-300 whitespace-nowrap flex-shrink-0"
+            style={{ color: active === key ? 'var(--color-gold-400)' : 'rgb(150,145,138)' }}
+          >
+            {label}
             {active === key && (
-              <motion.span
-                layoutId="filter-pill"
-                className="absolute inset-0 rounded-full"
-                style={{ backgroundColor: 'var(--color-gold-glow)' }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+              <motion.div
+                layoutId="filter-underline"
+                className="absolute bottom-0 left-0 right-0 h-px"
+                style={{ backgroundColor: 'var(--color-gold-400)' }}
+                transition={{ type: 'spring', stiffness: 500, damping: 35 }}
               />
             )}
-          </AnimatePresence>
-          <span className="relative z-10">{label}</span>
-        </motion.button>
-      ))}
+          </motion.button>
+        ))}
+      </div>
     </nav>
   );
 }

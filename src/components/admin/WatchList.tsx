@@ -31,7 +31,7 @@ export function WatchList() {
 
   return (
     <div>
-      <div className="flex items-start justify-between mb-8">
+      <div className="flex flex-wrap items-start justify-between gap-4 mb-8">
         <div>
           <h1 className="text-2xl font-serif text-neutral-100 mb-1">Mis relojes</h1>
           <p className="text-neutral-500 text-sm">Aquí puedes ver, editar y agregar relojes al catálogo.</p>
