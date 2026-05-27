@@ -7,6 +7,7 @@ import { AdminLayout } from './components/admin/AdminLayout';
 import { LoginPage } from './components/admin/LoginPage';
 import { WatchList } from './components/admin/WatchList';
 import { WatchForm } from './components/admin/WatchForm';
+import { ResetPasswordPage } from './components/admin/ResetPasswordPage';
 import { pageVariants } from './constants/motion-variants';
 
 function AnimatedRoutes() {
@@ -18,6 +19,7 @@ function AnimatedRoutes() {
           <Route path="/" element={<HomageCatalogue />} />
           <Route path="/detalle/:id" element={<ComparisonPage />} />
           <Route path="/admin/login" element={<LoginPage />} />
+          <Route path="/admin/recuperar" element={<ResetPasswordPage />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<WatchList />} />
             <Route path="watches/new" element={<WatchForm />} />

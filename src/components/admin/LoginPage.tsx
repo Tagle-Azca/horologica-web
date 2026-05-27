@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 
 export function LoginPage() {
@@ -26,11 +26,6 @@ export function LoginPage() {
   return (
     <div className="min-h-screen bg-neutral-950 flex items-center justify-center px-6">
       <div className="w-full max-w-md">
-        <div className="text-center mb-10">
-          <h1 className="text-2xl font-serif text-neutral-100 mb-2">Panel de Administración</h1>
-          <p className="text-neutral-500 text-sm">Horológica · Gestión de contenido</p>
-        </div>
-
         <form onSubmit={handleSubmit} className="flex flex-col gap-5 bg-neutral-900 border border-neutral-800 rounded-2xl p-8">
           <div className="flex flex-col gap-2">
             <label className="text-sm font-medium text-neutral-300">Correo electrónico</label>
@@ -69,6 +64,10 @@ export function LoginPage() {
           >
             {loading ? 'Entrando...' : 'Entrar al panel'}
           </button>
+
+          <Link to="/admin/recuperar" className="text-center text-sm text-neutral-500 hover:text-neutral-300 transition-colors">
+            ¿Olvidaste tu contraseña?
+          </Link>
         </form>
       </div>
     </div>
