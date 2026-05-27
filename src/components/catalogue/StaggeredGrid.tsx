@@ -27,7 +27,7 @@ export function StaggeredGrid({ entries, onViewClick }: StaggeredGridProps) {
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
       >
         {entries.map((entry, i) => (
-          <div key={entry.id}>
+          <div key={entry.id} className="h-full">
             <WatchCard entry={entry} index={i} onViewClick={onViewClick} />
           </div>
         ))}
